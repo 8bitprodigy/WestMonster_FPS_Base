@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu7bqwx0s1nxm"]
+
+[ext_resource type="Script" path="res://entities/interactables/control_nodes/repeat.gd" id="1_ehhj1"]
+
+[node name="repeat" type="Node"]
+script = ExtResource("1_ehhj1")

@@ -1,0 +1,152 @@
+[gd_scene load_steps=31 format=3 uid="uid://befi1c57ig4pn"]
+
+[ext_resource type="Script" path="res://scripts/impact_material_collision_mesh_generator.gd" id="1_kdg6g"]
+[ext_resource type="Script" path="res://scripts/ImpactMaterialData.gd" id="2_qx0dq"]
+[ext_resource type="Resource" uid="uid://dm7ggmnxkyabh" path="res://entities/weapons/sprites/impacts/default_impact_material.tres" id="2_r5i7g"]
+[ext_resource type="Script" path="res://entities/weapons/decal_material.gd" id="4_fsa2d"]
+[ext_resource type="AudioStream" uid="uid://1ltt2whmo4qt" path="res://audio/sfx/impacts/generic/hit10_generic.wav" id="5_skd8o"]
+[ext_resource type="AudioStream" uid="uid://dmajtsuq5a5me" path="res://audio/sfx/impacts/flesh/hit10.wav" id="7_8s1ug"]
+[ext_resource type="Texture2D" uid="uid://bqdmc7f7iw0pa" path="res://entities/weapons/sprites/impacts/bullet_hole_glass_albedo.png" id="8_ge78f"]
+[ext_resource type="Texture2D" uid="uid://dcrq14bd220up" path="res://entities/weapons/sprites/impacts/bullet_hole_glass_normal.png" id="9_ruqv2"]
+[ext_resource type="Texture2D" uid="uid://cpmgnbu7ryq33" path="res://entities/weapons/sprites/impacts/bullet_hole_glass_orm.png" id="10_46vw4"]
+[ext_resource type="AudioStream" uid="uid://dt456jpg7725m" path="res://audio/sfx/impacts/stone/concrete_1.wav" id="11_71uqy"]
+[ext_resource type="Texture2D" uid="uid://dp1wgcd4m8xeu" path="res://entities/weapons/sprites/impacts/bullet_hole_metal_albedo.png" id="12_4stgr"]
+[ext_resource type="Texture2D" uid="uid://bybgevgykkj00" path="res://entities/weapons/sprites/impacts/bullet_hole_metal_normal.png" id="13_7nl4e"]
+[ext_resource type="AudioStream" uid="uid://m3yskutif5w3" path="res://audio/sfx/impacts/metal/metal_1.wav" id="14_tjrdw"]
+[ext_resource type="Texture2D" uid="uid://p8e61uk08j7x" path="res://entities/weapons/sprites/impacts/bullet_hole_stone_albedo.png" id="15_npyam"]
+[ext_resource type="Texture2D" uid="uid://c3h2hwshdcko8" path="res://entities/weapons/sprites/impacts/bullet_hole_stone_normal.png" id="16_wrjh7"]
+[ext_resource type="Texture2D" uid="uid://cflubhub8tgsc" path="res://entities/weapons/sprites/impacts/bullet_hole_stone_orm.png" id="17_7idxb"]
+[ext_resource type="Texture2D" uid="uid://brmvs645d1uxk" path="res://entities/weapons/sprites/impacts/bullet_hole_wood_albedo.png" id="18_q81gn"]
+[ext_resource type="Texture2D" uid="uid://bijnj3jv2d5uk" path="res://entities/weapons/sprites/impacts/bullet_hole_wood_normal.png" id="19_yc8ew"]
+[ext_resource type="AudioStream" uid="uid://c0wqhw3et6wty" path="res://audio/sfx/impacts/wood/impactwood14.wav" id="20_wbork"]
+
+[sub_resource type="Resource" id="Resource_5tqdp"]
+script = ExtResource("2_qx0dq")
+impact_material_name = "flesh"
+impact_material_path_pattern = Array[String]([""])
+decal_material = Array[ExtResource("4_fsa2d")]([])
+impact_audio = Array[AudioStream]([ExtResource("7_8s1ug")])
+impact_audio_min_pitch = 1.0
+impact_audio_max_pitch = 1.0
+footstep_audio = Array[AudioStream]([])
+footstep_audio_min_pitch = 1.0
+footstep_audio_max_pitch = 1.0
+
+[sub_resource type="Resource" id="Resource_nkjxc"]
+script = ExtResource("4_fsa2d")
+size = Vector3(0.25, 0.25, 0.25)
+albedo = ExtResource("8_ge78f")
+normal = ExtResource("9_ruqv2")
+orm = ExtResource("10_46vw4")
+emission_energy = 0.0
+modulate = Color(1, 1, 1, 1)
+albedo_mix = 1.0
+normal_fade = 0.0
+
+[sub_resource type="Resource" id="Resource_buxls"]
+script = ExtResource("2_qx0dq")
+impact_material_name = "glass"
+impact_material_path_pattern = Array[String](["textures/blue"])
+decal_material = Array[ExtResource("4_fsa2d")]([SubResource("Resource_nkjxc")])
+impact_audio = Array[AudioStream]([ExtResource("11_71uqy")])
+impact_audio_min_pitch = 1.0
+impact_audio_max_pitch = 1.0
+footstep_audio = Array[AudioStream]([])
+footstep_audio_min_pitch = 1.0
+footstep_audio_max_pitch = 1.0
+
+[sub_resource type="Resource" id="Resource_2js2j"]
+script = ExtResource("4_fsa2d")
+size = Vector3(0.25, 0.25, 0.25)
+albedo = ExtResource("12_4stgr")
+normal = ExtResource("13_7nl4e")
+emission_energy = 0.0
+modulate = Color(1, 1, 1, 1)
+albedo_mix = 1.0
+normal_fade = 0.0
+
+[sub_resource type="Resource" id="Resource_tu630"]
+script = ExtResource("2_qx0dq")
+impact_material_name = "metal"
+impact_material_path_pattern = Array[String](["textures/orange"])
+decal_material = Array[ExtResource("4_fsa2d")]([SubResource("Resource_2js2j")])
+impact_audio = Array[AudioStream]([ExtResource("14_tjrdw")])
+impact_audio_min_pitch = 1.0
+impact_audio_max_pitch = 1.0
+footstep_audio = Array[AudioStream]([null])
+footstep_audio_min_pitch = 1.0
+footstep_audio_max_pitch = 1.0
+
+[sub_resource type="Resource" id="Resource_vt1ec"]
+script = ExtResource("4_fsa2d")
+size = Vector3(0.25, 0.25, 0.25)
+albedo = ExtResource("12_4stgr")
+normal = ExtResource("13_7nl4e")
+emission_energy = 0.0
+modulate = Color(1, 1, 1, 1)
+albedo_mix = 1.0
+normal_fade = 0.0
+
+[sub_resource type="Resource" id="Resource_7o3ny"]
+script = ExtResource("2_qx0dq")
+impact_material_name = "polymer"
+impact_material_path_pattern = Array[String]([])
+decal_material = Array[ExtResource("4_fsa2d")]([SubResource("Resource_vt1ec")])
+impact_audio = Array[AudioStream]([ExtResource("5_skd8o")])
+impact_audio_min_pitch = 1.0
+impact_audio_max_pitch = 1.0
+footstep_audio = Array[AudioStream]([])
+footstep_audio_min_pitch = 1.0
+footstep_audio_max_pitch = 1.0
+
+[sub_resource type="Resource" id="Resource_3ofj5"]
+script = ExtResource("4_fsa2d")
+size = Vector3(0.25, 0.25, 0.25)
+albedo = ExtResource("15_npyam")
+normal = ExtResource("16_wrjh7")
+orm = ExtResource("17_7idxb")
+emission_energy = 0.0
+modulate = Color(1, 1, 1, 1)
+albedo_mix = 1.0
+normal_fade = 0.0
+
+[sub_resource type="Resource" id="Resource_rand8"]
+script = ExtResource("2_qx0dq")
+impact_material_name = "stone"
+impact_material_path_pattern = Array[String](["textures/dark", "textures/light"])
+decal_material = Array[ExtResource("4_fsa2d")]([SubResource("Resource_3ofj5")])
+impact_audio = Array[AudioStream]([ExtResource("11_71uqy")])
+impact_audio_min_pitch = 1.0
+impact_audio_max_pitch = 1.0
+footstep_audio = Array[AudioStream]([])
+footstep_audio_min_pitch = 1.0
+footstep_audio_max_pitch = 1.0
+
+[sub_resource type="Resource" id="Resource_c5dae"]
+script = ExtResource("4_fsa2d")
+size = Vector3(0.25, 0.25, 0.25)
+albedo = ExtResource("18_q81gn")
+normal = ExtResource("19_yc8ew")
+emission_energy = 0.0
+modulate = Color(1, 1, 1, 1)
+albedo_mix = 1.0
+normal_fade = 0.0
+
+[sub_resource type="Resource" id="Resource_mbj05"]
+script = ExtResource("2_qx0dq")
+impact_material_name = "wood"
+impact_material_path_pattern = Array[String](["textures/red"])
+decal_material = Array[ExtResource("4_fsa2d")]([SubResource("Resource_c5dae")])
+impact_audio = Array[AudioStream]([ExtResource("20_wbork")])
+impact_audio_min_pitch = 1.0
+impact_audio_max_pitch = 1.0
+footstep_audio = Array[AudioStream]([])
+footstep_audio_min_pitch = 1.0
+footstep_audio_max_pitch = 1.0
+
+[node name="ImpactMaterialCollisionGenerator" type="Node3D"]
+script = ExtResource("1_kdg6g")
+_level_node = NodePath(".")
+impact_materials = Array[ExtResource("2_qx0dq")]([SubResource("Resource_5tqdp"), SubResource("Resource_buxls"), SubResource("Resource_tu630"), SubResource("Resource_7o3ny"), SubResource("Resource_rand8"), SubResource("Resource_mbj05"), ExtResource("2_r5i7g")])
+default_impact_material = ExtResource("2_r5i7g")
+generate_on_runtime = null

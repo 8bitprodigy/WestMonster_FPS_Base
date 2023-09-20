@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DecalMaterial" load_steps=4 format=3 uid="uid://bdw87g2p2tevo"]
+
+[ext_resource type="Texture2D" uid="uid://dp1wgcd4m8xeu" path="res://entities/weapons/sprites/impacts/bullet_hole_metal_albedo.png" id="1_26s2e"]
+[ext_resource type="Texture2D" uid="uid://bybgevgykkj00" path="res://entities/weapons/sprites/impacts/bullet_hole_metal_normal.png" id="2_xuajo"]
+[ext_resource type="Script" path="res://entities/weapons/decal_material.gd" id="3_4wwfh"]
+
+[resource]
+script = ExtResource("3_4wwfh")
+size = Vector3(0.1, 0.1, 0.1)
+albedo = ExtResource("1_26s2e")
+normal = ExtResource("2_xuajo")
+emission_energy = 0.0
+modulate = Color(1, 1, 1, 1)
+albedo_mix = 1.0
+normal_fade = 0.0

@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=3 uid="uid://bywqvxaojagvw"]
+
+[ext_resource type="Script" path="res://entities/weapons/physmat_bullet_impact.gd" id="1_w8w72"]
+[ext_resource type="Resource" uid="uid://cc6dqcgmb6toc" path="res://entities/weapons/sprites/impacts/dirt_impact_material.tres" id="2_0dwhe"]
+[ext_resource type="Texture2D" uid="uid://dp1wgcd4m8xeu" path="res://entities/weapons/sprites/impacts/bullet_hole_metal_albedo.png" id="2_wbvfx"]
+[ext_resource type="Resource" uid="uid://30a6huqw553q" path="res://entities/weapons/sprites/impacts/glass_impact_material.tres" id="3_0idfh"]
+[ext_resource type="Texture2D" uid="uid://bybgevgykkj00" path="res://entities/weapons/sprites/impacts/bullet_hole_metal_normal.png" id="3_dw56p"]
+[ext_resource type="Resource" uid="uid://b06n31dmp3nly" path="res://entities/weapons/sprites/impacts/stone_impact_material.tres" id="3_or1hs"]
+[ext_resource type="Resource" uid="uid://c7vklwl8g2kvw" path="res://entities/weapons/sprites/impacts/metal_impact_material.tres" id="4_av4w0"]
+[ext_resource type="Resource" uid="uid://ywwe7dvn4xvs" path="res://entities/weapons/sprites/impacts/wood_impact_material.tres" id="10_ixj2x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i46o4"]
+shading_mode = 0
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_08alc"]
+material = SubResource("StandardMaterial3D_i46o4")
+top_radius = 0.025
+bottom_radius = 0.0
+height = 0.25
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0clr"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_14fy3"]
+material = SubResource("StandardMaterial3D_r0clr")
+top_radius = 0.025
+bottom_radius = 0.0
+height = 0.25
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsnxn"]
+shading_mode = 0
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kdkvr"]
+material = SubResource("StandardMaterial3D_nsnxn")
+top_radius = 0.025
+bottom_radius = 0.0
+height = 0.25
+cap_bottom = false
+
+[node name="physmat_bullet_impact" type="Node3D"]
+rotation_edit_mode = 1
+script = ExtResource("1_w8w72")
+_decal = NodePath("Decal")
+_audio = NodePath("AudioStreamPlayer3D")
+_particles = NodePath("GPUParticles3D")
+_timer = NodePath("Timer")
+default_impact_material = 6
+dirt_impact_material = ExtResource("2_0dwhe")
+flesh_impact_material = ExtResource("2_0dwhe")
+glass_impact_material = ExtResource("3_0idfh")
+metal_impact_material = ExtResource("4_av4w0")
+polymer_impact_material = ExtResource("4_av4w0")
+stone_impact_material = ExtResource("3_or1hs")
+wood_impact_material = ExtResource("10_ixj2x")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+size = Vector3(0.1, 0.1, 0.1)
+texture_albedo = ExtResource("2_wbvfx")
+texture_normal = ExtResource("3_dw56p")
+emission_energy = 0.0
+distance_fade_enabled = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
+mesh = SubResource("CylinderMesh_08alc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.1, 0, 0)
+visible = false
+mesh = SubResource("CylinderMesh_14fy3")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.1)
+visible = false
+mesh = SubResource("CylinderMesh_kdkvr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

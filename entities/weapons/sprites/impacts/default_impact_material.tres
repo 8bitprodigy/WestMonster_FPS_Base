@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ImpactMaterialData" load_steps=7 format=3 uid="uid://dm7ggmnxkyabh"]
+
+[ext_resource type="Texture2D" uid="uid://ckrmootvqvma3" path="res://entities/weapons/sprites/impacts/bullet_hole_dirt_albedo.png" id="1_ef5m0"]
+[ext_resource type="Texture2D" uid="uid://dc4g7l7rj562e" path="res://entities/weapons/sprites/impacts/bullet_hole_dirt_normal.png" id="2_8e1rw"]
+[ext_resource type="Script" path="res://entities/weapons/decal_material.gd" id="3_vmi15"]
+[ext_resource type="AudioStream" uid="uid://1ltt2whmo4qt" path="res://audio/sfx/impacts/generic/hit10_generic.wav" id="4_1dfjt"]
+[ext_resource type="Script" path="res://scripts/ImpactMaterialData.gd" id="5_tgjtf"]
+
+[sub_resource type="Resource" id="Resource_x8fdv"]
+script = ExtResource("3_vmi15")
+size = Vector3(0.25, 0.25, 0.25)
+albedo = ExtResource("1_ef5m0")
+normal = ExtResource("2_8e1rw")
+emission_energy = 0.0
+modulate = Color(1, 1, 1, 1)
+albedo_mix = 1.0
+normal_fade = 0.0
+
+[resource]
+script = ExtResource("5_tgjtf")
+impact_material_name = "dirt"
+impact_material_path_pattern = Array[String](["textures/green"])
+decal_material = Array[ExtResource("3_vmi15")]([SubResource("Resource_x8fdv")])
+impact_audio = Array[AudioStream]([ExtResource("4_1dfjt")])
+impact_audio_min_pitch = 1.0
+impact_audio_max_pitch = 1.0
+footstep_audio = Array[AudioStream]([null])
+footstep_audio_min_pitch = 1.0
+footstep_audio_max_pitch = 1.0

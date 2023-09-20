@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://blanxw404ynrp"]
+
+[ext_resource type="Script" path="res://entities/characters/character_controller.gd" id="1_a64j1"]
+[ext_resource type="Script" path="res://entities/characters/blob_shadow.gd" id="2_gxa46"]
+[ext_resource type="Texture2D" uid="uid://crcdxyj4d5cte" path="res://sprites/shadow_blob.png" id="2_nueeo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ejd2"]
+size = Vector3(0.5, 1.75, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yy6l4"]
+shading_mode = 2
+diffuse_mode = 1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xqu5i"]
+material = SubResource("StandardMaterial3D_yy6l4")
+radius = 0.4
+height = 1.75
+radial_segments = 12
+rings = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_hqeym"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7u6rs"]
+top_radius = 0.0
+bottom_radius = 0.001
+height = 1.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_385im"]
+properties/0/path = NodePath("CollisionShape3D/MeshInstance3D:scale")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("CollisionShape3D/MeshInstance3D:position")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("CollisionShape3D:rotation")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath("torso/shoulder:rotation")
+properties/4/spawn = true
+properties/4/sync = true
+properties/5/path = NodePath("torso:rotation")
+properties/5/spawn = true
+properties/5/sync = true
+properties/6/path = NodePath("torso/head:rotation")
+properties/6/spawn = true
+properties/6/sync = true
+properties/7/path = NodePath(".:position")
+properties/7/spawn = true
+properties/7/sync = true
+
+[node name="character_controller" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_a64j1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("BoxShape3D_1ejd2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+layers = 2
+mesh = SubResource("CapsuleMesh_xqu5i")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+visible = false
+layers = 2
+mesh = SubResource("BoxMesh_hqeym")
+skeleton = NodePath("../..")
+
+[node name="torso" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+
+[node name="head" type="Node3D" parent="torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0)
+
+[node name="use_ray" type="RayCast3D" parent="torso/head"]
+enabled = false
+target_position = Vector3(0, 0, -2)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="torso/head/use_ray"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0230163, -0.5)
+visible = false
+mesh = SubResource("CylinderMesh_7u6rs")
+
+[node name="shoulder" type="Node3D" parent="torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="hands" type="Node3D" parent="torso/shoulder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+
+[node name="right_hand_point" type="Marker3D" parent="torso/shoulder/hands"]
+
+[node name="left_hand_point" type="Marker3D" parent="torso/shoulder/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="right_hand" type="Node3D" parent="torso/shoulder/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+
+[node name="left_hand" type="Node3D" parent="torso/shoulder/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+
+[node name="decal_ray" type="RayCast3D" parent="."]
+target_position = Vector3(0, -50, 0)
+script = ExtResource("2_gxa46")
+
+[node name="Decal" type="Decal" parent="decal_ray"]
+size = Vector3(1, 40, 1)
+texture_albedo = ExtResource("2_nueeo")
+distance_fade_enabled = true
+cull_mask = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_385im")
+
+[node name="swim_ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+target_position = Vector3(0, -1.75, 0)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false

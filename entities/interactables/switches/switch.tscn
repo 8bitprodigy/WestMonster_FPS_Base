@@ -1,0 +1,193 @@
+[gd_scene load_steps=21 format=3 uid="uid://bllb3vjt7b2js"]
+
+[ext_resource type="Script" path="res://entities/interactables/switches/switch.gd" id="1_gjmac"]
+[ext_resource type="Script" path="res://entities/interactables/switches/switch_node.gd" id="2_yg1gi"]
+[ext_resource type="Texture2D" uid="uid://c01un351dwjy3" path="res://textures/red/texture_02.png" id="3_lf6nc"]
+[ext_resource type="Texture2D" uid="uid://dur006ceu0cj7" path="res://textures/dark/texture_03.png" id="4_2av8q"]
+[ext_resource type="AudioStream" uid="uid://dek6kougaodnr" path="res://audio/sfx/interface/select_001.ogg" id="5_jyoy0"]
+[ext_resource type="AudioStream" uid="uid://bx5dmqook0km3" path="res://audio/sfx/interface/select_002.ogg" id="6_kpek7"]
+[ext_resource type="AudioStream" uid="uid://herwas6b7bng" path="res://audio/sfx/interface/confirmation_001.ogg" id="7_vt7de"]
+[ext_resource type="AudioStream" uid="uid://cosw0clvqlgqa" path="res://audio/sfx/interface/error_007.ogg" id="8_37mwu"]
+[ext_resource type="AudioStream" uid="uid://r4fm82f7ni6m" path="res://audio/sfx/interface/scratch_001.ogg" id="9_qbg3v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0mvnk"]
+size = Vector3(0.1, 0.1, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uy4eh"]
+albedo_texture = ExtResource("3_lf6nc")
+metallic_specular = 0.0
+roughness = 0.0
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_bm4fa"]
+material = SubResource("StandardMaterial3D_uy4eh")
+size = Vector3(0.1, 0.1, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5rdqt"]
+shading_mode = 2
+diffuse_mode = 1
+albedo_texture = ExtResource("4_2av8q")
+metallic_specular = 0.0
+roughness = 0.0
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ycsvu"]
+material = SubResource("StandardMaterial3D_5rdqt")
+size = Vector3(0.2, 0.2, 0.025)
+
+[sub_resource type="Animation" id="Animation_r5elu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("switch/CollisionShape3D/throw_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k212a"]
+resource_name = "down"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("switch/CollisionShape3D/throw_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.025)]
+}
+
+[sub_resource type="Animation" id="Animation_8pa5b"]
+resource_name = "press"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("switch/CollisionShape3D/throw_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.025), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("down_sound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("up_sound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6v112"]
+resource_name = "up"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("switch/CollisionShape3D/throw_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.025), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hukri"]
+_data = {
+"RESET": SubResource("Animation_r5elu"),
+"down": SubResource("Animation_k212a"),
+"press": SubResource("Animation_8pa5b"),
+"up": SubResource("Animation_6v112")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nxsc8"]
+properties/0/path = NodePath("up_sound:playing")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("down_sound:playing")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("activate_sound:playing")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("deactivate_sound:playing")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath("destroy_sound:playing")
+properties/4/spawn = true
+properties/4/sync = true
+
+[node name="switch" type="Node3D"]
+script = ExtResource("1_gjmac")
+
+[node name="switch" type="Area3D" parent="."]
+script = ExtResource("2_yg1gi")
+_handler_node = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="switch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0497499)
+shape = SubResource("BoxShape3D_0mvnk")
+
+[node name="throw_mesh" type="MeshInstance3D" parent="switch/CollisionShape3D"]
+mesh = SubResource("BoxMesh_bm4fa")
+skeleton = NodePath("../..")
+
+[node name="base_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.012)
+mesh = SubResource("BoxMesh_ycsvu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hukri")
+}
+
+[node name="up_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jyoy0")
+
+[node name="down_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_kpek7")
+
+[node name="activate_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vt7de")
+
+[node name="deactivate_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_37mwu")
+
+[node name="destroy_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_qbg3v")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nxsc8")

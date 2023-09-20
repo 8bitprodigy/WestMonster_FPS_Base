@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://b1vh1qjom6hif"]
+
+[ext_resource type="Script" path="res://entities/interactables/switches/dial.gd" id="1_acvsj"]
+[ext_resource type="Texture2D" uid="uid://dstfrj6jirmw7" path="res://textures/red/texture_05.png" id="2_iscy7"]
+[ext_resource type="Script" path="res://entities/interactables/switches/dial_knob.gd" id="2_vnemy"]
+[ext_resource type="Texture2D" uid="uid://b68y8mp1tpr0i" path="res://textures/light/texture_03.png" id="3_0k7ms"]
+[ext_resource type="Texture2D" uid="uid://cwhw525otqptq" path="res://textures/dark/texture_08.png" id="4_el5b1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nh27i"]
+height = 0.2
+radius = 0.125
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ko4x0"]
+albedo_texture = ExtResource("2_iscy7")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_goo7u"]
+material = SubResource("StandardMaterial3D_ko4x0")
+top_radius = 0.125
+bottom_radius = 0.125
+height = 0.025
+radial_segments = 8
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45ygf"]
+albedo_texture = ExtResource("3_0k7ms")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_44kic"]
+material = SubResource("StandardMaterial3D_45ygf")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.2
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlwc0"]
+albedo_texture = ExtResource("4_el5b1")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_65pk0"]
+material = SubResource("StandardMaterial3D_jlwc0")
+top_radius = 0.1
+bottom_radius = 0.125
+height = 0.05
+radial_segments = 8
+rings = 1
+
+[node name="dial" type="Node3D"]
+script = ExtResource("1_acvsj")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_vnemy")
+_handler_node = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.1)
+shape = SubResource("CylinderShape3D_nh27i")
+
+[node name="knob" type="MeshInstance3D" parent="Area3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("CylinderMesh_goo7u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D/knob"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0502085, 2.19468e-09)
+mesh = SubResource("CylinderMesh_44kic")
+
+[node name="base_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.025)
+mesh = SubResource("CylinderMesh_65pk0")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

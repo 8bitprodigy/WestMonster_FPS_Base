@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ImpactMaterial" load_steps=4 format=3 uid="uid://b06n31dmp3nly"]
+
+[ext_resource type="AudioStream" uid="uid://dt456jpg7725m" path="res://audio/sfx/impacts/stone/concrete_1.wav" id="1_ecldy"]
+[ext_resource type="Resource" uid="uid://860i6kbnhc4" path="res://entities/weapons/sprites/impacts/stone_decal_material.tres" id="1_kxghj"]
+[ext_resource type="Script" path="res://impact_material.gd" id="2_435mr"]
+
+[resource]
+script = ExtResource("2_435mr")
+decal_material = Array[Resource("res://entities/weapons/decal_material.gd")]([ExtResource("1_kxghj")])
+audio = Array[AudioStream]([ExtResource("1_ecldy")])
+audio_min_pitch = 0.9
+audio_max_pitch = 1.2

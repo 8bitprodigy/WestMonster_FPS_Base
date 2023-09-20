@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024"
+   height="1024"
+   viewBox="0 0 1024 1024"
+   version="1.1"
+   id="svg28664"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="ladder.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview28666"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="0.27622351"
+     inkscape:cx="662.50698"
+     inkscape:cy="215.40527"
+     inkscape:window-width="2560"
+     inkscape:window-height="1390"
+     inkscape:window-x="1920"
+     inkscape:window-y="1080"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid28785"
+       empspacing="4" />
+  </sodipodi:namedview>
+  <defs
+     id="defs28661" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect28839"
+       style="fill:#d40000;stroke:none;stroke-width:8;stop-color:#000000"
+       d="M 0,0 V 1024 H 128 V 800 h 768 v 224 h 128 V 0 H 896 V 224 H 128 V 0 Z M 128,288 H 896 V 736 H 128 Z"
+       sodipodi:nodetypes="cccccccccccccccccc" />
+    <path
+       id="rect28854"
+       style="fill:none;stroke:#ffffff;stroke-width:8;stop-color:#000000"
+       d="M 896,0 V 224 H 128 V 0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:8;stop-color:#000000;stroke-dasharray:none"
+       id="rect28856"
+       width="768"
+       height="448"
+       x="128"
+       y="288" />
+    <path
+       id="rect28858"
+       style="fill:none;stroke:#ffffff;stroke-width:8;stop-color:#000000"
+       d="M 128,1024 V 800 h 768 v 224"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 4,0 V 1024"
+       id="path28860" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 1020,0 V 1024"
+       id="path29225" />
+  </g>
+</svg>

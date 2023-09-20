@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 16.933333 16.933333"
+   version="1.1"
+   id="svg32875"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="sliding_door.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview32877"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="-2.4748737"
+     inkscape:cy="0.97227182"
+     inkscape:window-width="2560"
+     inkscape:window-height="1390"
+     inkscape:window-x="1920"
+     inkscape:window-y="1080"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid32996"
+       empspacing="4" />
+  </sodipodi:namedview>
+  <defs
+     id="defs32872" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect33473"
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999;stroke-linecap:round;stroke-linejoin:round;stop-color:#000000"
+       d="m 5.2916749,7.6729167 1.0583335,0.79375 -1.0583335,0.79375 z"
+       sodipodi:nodetypes="cccc" />
+    <path
+       id="rect41883"
+       style="fill:none;stroke:#ffffff;stroke-width:0.499999;stroke-linecap:square;stroke-linejoin:round;stop-color:#000000"
+       d="M 4.2333331,14.816665 V 2.1166667 H 12.699998 V 14.816665"
+       sodipodi:nodetypes="cccc" />
+    <path
+       id="rect41886"
+       style="fill:#ffffff;stroke-width:0.499999;stroke-linejoin:round;stop-color:#000000"
+       d="m 7.4083333,2.6458333 c -0.264583,0 -0.2645833,0.2645834 -0.2645833,0.2645834 V 14.552083 c 0,0.264584 0.2645833,0.264584 0.2645833,0.264584 H 12.170833 V 2.6458333 Z M 7.9375,3.7041664 h 4.233333 v 4.7625 H 7.9375 Z m 0,5.8208333 h 4.233333 l 0,3.1750003 H 7.9375003 Z"
+       sodipodi:nodetypes="scscccscccccccccc" />
+  </g>
+</svg>

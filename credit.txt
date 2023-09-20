@@ -1,0 +1,1 @@
+Player controller movement code derrived from axel37's godot-quake-movement: https://github.com/axel37/godot-quake-movement

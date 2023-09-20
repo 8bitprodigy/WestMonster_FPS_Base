@@ -1,0 +1,109 @@
+[gd_scene load_steps=14 format=3 uid="uid://cgx0fju3gbjux"]
+
+[ext_resource type="Script" path="res://entities/interactables/doors/sliding_door.gd" id="1_2wpb5"]
+[ext_resource type="Script" path="res://entities/interactables/doors/door_node.gd" id="2_jkkci"]
+[ext_resource type="Texture2D" uid="uid://p23vrtdo1byi" path="res://textures/red/texture_03.png" id="3_2pmus"]
+[ext_resource type="AudioStream" uid="uid://dgnnhbgumptx5" path="res://audio/sfx/doors/door_sliding_open.wav" id="3_t2ujs"]
+[ext_resource type="AudioStream" uid="uid://i1ve3vo7ueki" path="res://audio/sfx/doors/door_sliding_close.wav" id="4_4ysak"]
+[ext_resource type="AudioStream" uid="uid://cosw0clvqlgqa" path="res://audio/sfx/interface/error_007.ogg" id="5_mvb6k"]
+[ext_resource type="AudioStream" uid="uid://herwas6b7bng" path="res://audio/sfx/interface/confirmation_001.ogg" id="6_52ptw"]
+[ext_resource type="AudioStream" uid="uid://r4fm82f7ni6m" path="res://audio/sfx/interface/scratch_001.ogg" id="7_12igs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3cnr"]
+size = Vector3(1, 2, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6rlm"]
+albedo_texture = ExtResource("3_2pmus")
+metallic_specular = 0.0
+roughness = 0.0
+uv1_offset = Vector3(0.5, 0, 0)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_jml8c"]
+material = SubResource("StandardMaterial3D_x6rlm")
+size = Vector3(1, 2, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vdvll"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nkp6o"]
+properties/0/path = NodePath("door:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("door/open_sound:playing")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("door/close_sound:playing")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("door/locked_sound:playing")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath("door/unlock_sound:playing")
+properties/4/spawn = true
+properties/4/sync = true
+properties/5/path = NodePath("door/destroy_sound:playing")
+properties/5/spawn = true
+properties/5/sync = true
+
+[node name="sliding_door" type="Node3D"]
+script = ExtResource("1_2wpb5")
+obstruction_behavior = 2
+
+[node name="door" type="AnimatableBody3D" parent="." groups=["door"]]
+collision_mask = 2
+sync_to_physics = false
+script = ExtResource("2_jkkci")
+_handler_node = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_d3cnr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_jml8c")
+
+[node name="open_sound" type="AudioStreamPlayer3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("3_t2ujs")
+
+[node name="close_sound" type="AudioStreamPlayer3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("4_4ysak")
+
+[node name="locked_sound" type="AudioStreamPlayer3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("5_mvb6k")
+
+[node name="unlock_sound" type="AudioStreamPlayer3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("6_52ptw")
+
+[node name="destroy_sound" type="AudioStreamPlayer3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("7_12igs")
+
+[node name="front_trigger" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="front_trigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
+shape = SubResource("BoxShape3D_vdvll")
+
+[node name="back_trigger" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="back_trigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+shape = SubResource("BoxShape3D_vdvll")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nkp6o")
+
+[connection signal="body_entered" from="front_trigger" to="." method="_on_front_trigger_body_entered"]
+[connection signal="body_exited" from="front_trigger" to="." method="_on_front_trigger_body_exited"]
+[connection signal="body_entered" from="back_trigger" to="." method="_on_back_trigger_body_entered"]
+[connection signal="body_exited" from="back_trigger" to="." method="_on_back_trigger_body_exited"]

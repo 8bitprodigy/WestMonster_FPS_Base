@@ -1,0 +1,381 @@
+{
+	"connections": [
+		{
+			"from": "normal_map2",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 4
+		},
+		{
+			"from": "dirt",
+			"from_port": 0,
+			"to": "invert",
+			"to_port": 0
+		},
+		{
+			"from": "fbm2",
+			"from_port": 0,
+			"to": "blend2_2",
+			"to_port": 1
+		},
+		{
+			"from": "invert",
+			"from_port": 0,
+			"to": "blend2_2",
+			"to_port": 0
+		},
+		{
+			"from": "blend2_2",
+			"from_port": 0,
+			"to": "invert_2",
+			"to_port": 0
+		},
+		{
+			"from": "invert_2",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 1
+		},
+		{
+			"from": "dirt",
+			"from_port": 0,
+			"to": "warp",
+			"to_port": 1
+		},
+		{
+			"from": "shape",
+			"from_port": 0,
+			"to": "warp",
+			"to_port": 0
+		},
+		{
+			"from": "warp",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 0
+		},
+		{
+			"from": "blend2",
+			"from_port": 0,
+			"to": "gaussian_blur",
+			"to_port": 0
+		},
+		{
+			"from": "gaussian_blur",
+			"from_port": 0,
+			"to": "blend2_3",
+			"to_port": 0
+		},
+		{
+			"from": "invert",
+			"from_port": 0,
+			"to": "blend2_3",
+			"to_port": 1
+		},
+		{
+			"from": "shape_2",
+			"from_port": 0,
+			"to": "gaussian_blur_2",
+			"to_port": 0
+		},
+		{
+			"from": "blend2_3",
+			"from_port": 0,
+			"to": "blend2_4",
+			"to_port": 0
+		},
+		{
+			"from": "gaussian_blur_2",
+			"from_port": 0,
+			"to": "blend2_4",
+			"to_port": 1
+		},
+		{
+			"from": "blend2_4",
+			"from_port": 0,
+			"to": "normal_map2",
+			"to_port": 0
+		},
+		{
+			"from": "blend2_4",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 6
+		},
+		{
+			"from": "blend2_4",
+			"from_port": 0,
+			"to": "invert_3",
+			"to_port": 0
+		},
+		{
+			"from": "invert_3",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		},
+		{
+			"from": "blend2_4",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 7
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "1947",
+	"node_position": {
+		"x": 0,
+		"y": 0
+	},
+	"nodes": [
+		{
+			"export_last_target": "Godot/Godot 4 Standard",
+			"export_paths": {
+				"Godot/Godot 4 Standard": "/run/media/chris/Alpine/game_assets/materials/impact_materials/bullet_hole_dirt"
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 220,
+				"y": -40
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1,
+					"b": 1,
+					"g": 1,
+					"r": 1,
+					"type": "Color"
+				},
+				"ao": 1,
+				"depth_scale": 1,
+				"emission_energy": 1,
+				"flags_transparent": true,
+				"metallic": 0,
+				"normal": 1,
+				"roughness": 1,
+				"size": 8,
+				"sss": 1
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "dirt",
+			"node_position": {
+				"x": -1340,
+				"y": 80
+			},
+			"parameters": {
+				"d_scale": 1,
+				"param0": 2,
+				"param1": 11
+			},
+			"seed_int": 0,
+			"type": "dirt"
+		},
+		{
+			"generic_size": 1,
+			"name": "blend2",
+			"node_position": {
+				"x": -640,
+				"y": -300
+			},
+			"parameters": {
+				"amount1": 0.42,
+				"blend_type1": 2
+			},
+			"seed_int": 0,
+			"type": "blend2"
+		},
+		{
+			"name": "fbm2",
+			"node_position": {
+				"x": -1320,
+				"y": -180
+			},
+			"parameters": {
+				"folds": 1,
+				"iterations": 2,
+				"noise": 3,
+				"offset": 0.05,
+				"persistence": 1.04,
+				"scale_x": 5,
+				"scale_y": 5
+			},
+			"seed_int": 0,
+			"type": "fbm2"
+		},
+		{
+			"generic_size": 1,
+			"name": "blend2_2",
+			"node_position": {
+				"x": -1000,
+				"y": -140
+			},
+			"parameters": {
+				"amount1": 0.5,
+				"blend_type1": 13
+			},
+			"seed_int": 0,
+			"type": "blend2"
+		},
+		{
+			"name": "shape",
+			"node_position": {
+				"x": -1240,
+				"y": -380
+			},
+			"parameters": {
+				"edge": 1,
+				"radius": 0.64,
+				"shape": 0,
+				"sides": 2
+			},
+			"seed_int": 0,
+			"type": "shape"
+		},
+		{
+			"name": "warp",
+			"node_position": {
+				"x": -880,
+				"y": -500
+			},
+			"parameters": {
+				"amount": 0.375,
+				"eps": 0.105,
+				"mode": 1
+			},
+			"seed_int": 0,
+			"type": "warp"
+		},
+		{
+			"name": "normal_map2",
+			"node_position": {
+				"x": -360,
+				"y": -160
+			},
+			"parameters": {
+				"buffer": 1,
+				"param2": 0,
+				"size": 10,
+				"strength": 1
+			},
+			"seed_int": 0,
+			"type": "normal_map2"
+		},
+		{
+			"name": "invert",
+			"node_position": {
+				"x": -1140,
+				"y": 100
+			},
+			"parameters": {
+
+			},
+			"seed_int": 0,
+			"type": "invert"
+		},
+		{
+			"name": "gaussian_blur",
+			"node_position": {
+				"x": -680,
+				"y": 140
+			},
+			"parameters": {
+				"param0": 10,
+				"param1": 9.6,
+				"param2": 0
+			},
+			"seed_int": 0,
+			"type": "gaussian_blur"
+		},
+		{
+			"name": "invert_2",
+			"node_position": {
+				"x": -780,
+				"y": 20
+			},
+			"parameters": {
+
+			},
+			"seed_int": 0,
+			"type": "invert"
+		},
+		{
+			"generic_size": 1,
+			"name": "blend2_3",
+			"node_position": {
+				"x": -680,
+				"y": 320
+			},
+			"parameters": {
+				"amount1": 0.14,
+				"blend_type1": 2
+			},
+			"seed_int": 0,
+			"type": "blend2"
+		},
+		{
+			"name": "shape_2",
+			"node_position": {
+				"x": -560,
+				"y": 520
+			},
+			"parameters": {
+				"edge": 0.95,
+				"radius": 0.12,
+				"shape": 0,
+				"sides": 2
+			},
+			"seed_int": 0,
+			"type": "shape"
+		},
+		{
+			"name": "gaussian_blur_2",
+			"node_position": {
+				"x": -320,
+				"y": 500
+			},
+			"parameters": {
+				"param0": 9,
+				"param1": 8.1,
+				"param2": 0
+			},
+			"seed_int": 0,
+			"type": "gaussian_blur"
+		},
+		{
+			"generic_size": 1,
+			"name": "blend2_4",
+			"node_position": {
+				"x": -360,
+				"y": 180
+			},
+			"parameters": {
+				"amount1": 0.39,
+				"blend_type1": 12
+			},
+			"seed_int": 0,
+			"type": "blend2"
+		},
+		{
+			"name": "invert_3",
+			"node_position": {
+				"x": -48.429382,
+				"y": 359.268677
+			},
+			"parameters": {
+
+			},
+			"seed_int": 0,
+			"type": "invert"
+		}
+	],
+	"parameters": {
+
+	},
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}

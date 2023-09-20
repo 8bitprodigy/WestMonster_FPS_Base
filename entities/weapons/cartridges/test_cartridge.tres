@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Cartridge" load_steps=5 format=3 uid="uid://80rog68b5ovb"]
+
+[ext_resource type="AudioStream" uid="uid://c0360vmamwfpe" path="res://audio/sfx/debug/tone.wav" id="1_tst45"]
+[ext_resource type="ArrayMesh" uid="uid://yumcbuxxuhdj" path="res://models/debug/arrow_forward_Cylinder.res" id="2_hvj3g"]
+[ext_resource type="Script" path="res://entities/weapons/cartridge_info.gd" id="3_4ul2a"]
+
+[sub_resource type="Curve" id="Curve_bv2dt"]
+_data = [Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.40661, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("3_4ul2a")
+cartridge_name = "test_cartridge"
+mesh = ExtResource("2_hvj3g")
+audio = ExtResource("1_tst45")
+max_damage = 1.0
+min_damage = 0.5
+damage_falloff = SubResource("Curve_bv2dt")
+speed = 360.0
+gravity = Vector3(0, 9.82, 0)
+time_increment = 1.0
+max_distance = 100.0

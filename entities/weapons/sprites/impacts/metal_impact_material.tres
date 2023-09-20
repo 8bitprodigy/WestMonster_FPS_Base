@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ImpactMaterial" load_steps=4 format=3 uid="uid://c7vklwl8g2kvw"]
+
+[ext_resource type="Resource" uid="uid://bdw87g2p2tevo" path="res://entities/weapons/sprites/impacts/metal_decal_material.tres" id="1_5wq7p"]
+[ext_resource type="AudioStream" uid="uid://m3yskutif5w3" path="res://audio/sfx/impacts/metal/metal_1.wav" id="1_gh8ql"]
+[ext_resource type="Script" path="res://impact_material.gd" id="2_5wvd3"]
+
+[resource]
+script = ExtResource("2_5wvd3")
+decal_material = Array[Resource("res://entities/weapons/decal_material.gd")]([ExtResource("1_5wq7p")])
+audio = Array[AudioStream]([ExtResource("1_gh8ql")])
+audio_min_pitch = 0.9
+audio_max_pitch = 1.2

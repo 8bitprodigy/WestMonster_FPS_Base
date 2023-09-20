@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://kfqoaw13jx4u"]
+
+[ext_resource type="Texture2D" uid="uid://8o3tih5smm8c" path="res://textures/dark/texture_09.png" id="1_30o12"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yimce"]
+albedo_texture = ExtResource("1_30o12")
+uv1_triplanar = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(16, 1, 16)
+material = SubResource("StandardMaterial3D_yimce")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 16)
+size = Vector3(16, 4, 16)
+material = SubResource("StandardMaterial3D_yimce")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.6, 7.5)
+size = Vector3(6, 2.8, 1)
+material = SubResource("StandardMaterial3D_yimce")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.4, 6.5)
+size = Vector3(6, 2.2, 1)
+material = SubResource("StandardMaterial3D_yimce")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.2, 5.5)
+size = Vector3(6, 1.6, 1)
+material = SubResource("StandardMaterial3D_yimce")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.9, 4.5)
+size = Vector3(6, 1.2, 1)
+material = SubResource("StandardMaterial3D_yimce")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.6, 3.5)
+size = Vector3(6, 0.8, 1)
+material = SubResource("StandardMaterial3D_yimce")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, 0.5, -0.5, 0, 11, 0)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://csjf1x4b3dtmh"]
+
+[ext_resource type="Script" path="res://entities/weapons/projectile_terminator_scene.gd" id="1_e3fmo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bjae4"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v4wf2"]
+material = SubResource("StandardMaterial3D_bjae4")
+radius = 0.025
+height = 0.05
+radial_segments = 4
+rings = 1
+
+[node name="bullet_impact" type="Node3D"]
+script = ExtResource("1_e3fmo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_v4wf2")

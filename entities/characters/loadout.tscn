@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3qxicxwvdkhb"]
+
+[ext_resource type="Script" path="res://entities/characters/loadout.gd" id="1_5ee6t"]
+[ext_resource type="PackedScene" uid="uid://dv10b11n2bh2i" path="res://entities/characters/hud_hands.tscn" id="2_3v6xg"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7vm1g"]
+properties/0/path = NodePath("entities:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("entities:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:rotation")
+properties/3/spawn = true
+properties/3/sync = true
+
+[node name="loadout" type="Node3D"]
+script = ExtResource("1_5ee6t")
+_controller = NodePath("..")
+_hud_hands = NodePath("shoulder/hud_hands")
+
+[node name="shoulder" type="Marker3D" parent="."]
+
+[node name="loadout_x" type="Marker3D" parent="shoulder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="loadout_y" type="Marker3D" parent="shoulder/loadout_x"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+
+[node name="hud_hands" parent="shoulder" instance=ExtResource("2_3v6xg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.15)
+
+[node name="entities" type="Node3D" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7vm1g")
