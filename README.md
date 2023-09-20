@@ -8,6 +8,8 @@ This project has the following features:
 - Quake-style movement
 - Ballistic projectiles(They fly through the air rather than being hitscans, and their trajectory is influenced by gravity)
 - Sprinting
+- Configurable jumping, wherein you specify height and time, rather than velocity
+- "Collision Material" System used by bullet impact decals, but can also be used to handle footstep sounds based on texture used
 - Configurable guns(Full auto, Semi-auto, selectable fire-modes, adjustable accuracy and precision, barrel heatup influencing those variables, etc.)
 - Aiming Down Sights
 - Weapon Bob
