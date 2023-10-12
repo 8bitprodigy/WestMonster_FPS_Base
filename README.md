@@ -21,3 +21,7 @@ This project has the following features:
 - Buttons(which can activate doors and potentially other things)
 - Dials(Which can control the open/close state of doors like in Half-Life)
 - Swimable water
+
+
+https://github.com/8bitprodigy/WestMonster_FPS_Base/assets/6080682/9854b67e-6fb3-464e-b275-24fd493a6c7e
+
