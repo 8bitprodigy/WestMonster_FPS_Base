@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://blanxw404ynrp"]
 
-[ext_resource type="Script" path="res://entities/characters/character_controller.gd" id="1_a64j1"]
 [ext_resource type="Script" path="res://entities/characters/blob_shadow.gd" id="2_gxa46"]
 [ext_resource type="Texture2D" uid="uid://crcdxyj4d5cte" path="res://sprites/shadow_blob.png" id="2_nueeo"]
+[ext_resource type="Script" path="res://entities/characters/InputSynchronizer.gd" id="4_e2q2l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ejd2"]
 size = Vector3(0.5, 1.75, 0.5)
@@ -29,32 +29,32 @@ height = 1.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_385im"]
 properties/0/path = NodePath("CollisionShape3D/MeshInstance3D:scale")
 properties/0/spawn = true
-properties/0/sync = true
+properties/0/replication_mode = 1
 properties/1/path = NodePath("CollisionShape3D/MeshInstance3D:position")
 properties/1/spawn = true
-properties/1/sync = true
+properties/1/replication_mode = 1
 properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
-properties/2/sync = true
+properties/2/replication_mode = 1
 properties/3/path = NodePath("CollisionShape3D:rotation")
 properties/3/spawn = true
-properties/3/sync = true
+properties/3/replication_mode = 1
 properties/4/path = NodePath("torso/shoulder:rotation")
 properties/4/spawn = true
-properties/4/sync = true
+properties/4/replication_mode = 1
 properties/5/path = NodePath("torso:rotation")
 properties/5/spawn = true
-properties/5/sync = true
+properties/5/replication_mode = 1
 properties/6/path = NodePath("torso/head:rotation")
 properties/6/spawn = true
-properties/6/sync = true
+properties/6/replication_mode = 1
 properties/7/path = NodePath(".:position")
 properties/7/spawn = true
-properties/7/sync = true
+properties/7/replication_mode = 1
 
 [node name="character_controller" type="CharacterBody3D"]
 collision_layer = 2
-script = ExtResource("1_a64j1")
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
@@ -81,6 +81,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.725, 0)
 [node name="use_ray" type="RayCast3D" parent="torso/head"]
 enabled = false
 target_position = Vector3(0, 0, -2)
+collision_mask = 7
 hit_from_inside = true
 collide_with_areas = true
 
@@ -118,6 +119,7 @@ cull_mask = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_385im")
+script = ExtResource("4_e2q2l")
 
 [node name="swim_ray" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)

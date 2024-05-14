@@ -110,10 +110,11 @@ node_b = NodePath("../jamb")
 angular_limit/enable = true
 
 [node name="door" type="RigidBody3D" parent="."]
-collision_mask = 2
+collision_layer = 4
+collision_mask = 7
+can_sleep = false
 max_contacts_reported = 16
 contact_monitor = true
-can_sleep = false
 script = ExtResource("2_3170r")
 _handler_node = NodePath("..")
 

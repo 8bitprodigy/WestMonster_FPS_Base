@@ -172,7 +172,7 @@ func receive_damage():
 	health_changed.emit(health)
 
 func get_gravity() -> float:
-	return jump_gravity if velocity.y < 0.0 else fall_gravity
+	return jump_gravity if velocity.y > 0.0 else fall_gravity
 
 func _is_on_floor() -> bool:
 	var collision_info = move_and_collide(Vector3(0,-0.1,0),true)

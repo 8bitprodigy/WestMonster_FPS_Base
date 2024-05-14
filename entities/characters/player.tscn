@@ -1,19 +1,37 @@
-[gd_scene load_steps=19 format=3 uid="uid://bbsivype7xjfi"]
+[gd_scene load_steps=25 format=3 uid="uid://bbsivype7xjfi"]
 
-[ext_resource type="PackedScene" uid="uid://blanxw404ynrp" path="res://entities/characters/character_controller.tscn" id="1_5ynx5"]
-[ext_resource type="Script" path="res://entities/characters/player.gd" id="2_wvk31"]
 [ext_resource type="Script" path="res://entities/characters/head_bob.gd" id="3_8224c"]
 [ext_resource type="Script" path="res://scripts/crosshairs.gd" id="4_6f3j0"]
-[ext_resource type="PackedScene" uid="uid://d3qxicxwvdkhb" path="res://entities/characters/loadout.tscn" id="4_pjc0o"]
-[ext_resource type="PackedScene" uid="uid://of7kaimovmq2" path="res://entities/weapons/testgun.tscn" id="6_e2dp5"]
-[ext_resource type="Script" path="res://scripts/loadout_category.gd" id="6_fv6dh"]
-[ext_resource type="Script" path="res://scripts/loadout_item.gd" id="6_iklwr"]
-[ext_resource type="PackedScene" uid="uid://cn1acunwyxsj4" path="res://entities/weapons/testgun0.tscn" id="8_n1hjb"]
+[ext_resource type="Script" path="res://entities/components/JumpInputHandler.gd" id="5_85fw1"]
+[ext_resource type="Script" path="res://entities/components/QuakeMovementInputHandler.gd" id="6_0w0ra"]
+[ext_resource type="Script" path="res://entities/components/jump_inhibitor.gd" id="6_3bhcy"]
+[ext_resource type="Script" path="res://entities/components/CrouchInputHandler.gd" id="7_6ew3e"]
+[ext_resource type="Script" path="res://entities/components/SprintInputHandler.gd" id="7_gmeuo"]
+[ext_resource type="Script" path="res://entities/components/LookInputHandler.gd" id="7_h4vjj"]
+[ext_resource type="Script" path="res://entities/components/sprint_throttle.gd" id="7_yvdxm"]
+[ext_resource type="Script" path="res://entities/components/MouseCaptureInputHandler.gd" id="9_k2p05"]
+[ext_resource type="Texture2D" uid="uid://crcdxyj4d5cte" path="res://sprites/shadow_blob.png" id="10_qxm60"]
+[ext_resource type="Texture2D" uid="uid://uglbolarhk1a" path="res://icon.svg" id="10_wp1lh"]
+[ext_resource type="Script" path="res://entities/characters/InputSynchronizer.gd" id="11_5ch4p"]
 
-[sub_resource type="Curve" id="Curve_k1oxi"]
-min_value = -1.0
-_data = [Vector2(0.25, -1), 0.0, 0.0, 0, 0, Vector2(0.375, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_385im"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ejd2"]
+size = Vector3(0.75, 1.75, 0.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yy6l4"]
+shading_mode = 2
+diffuse_mode = 1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xqu5i"]
+material = SubResource("StandardMaterial3D_yy6l4")
+radius = 0.4
+height = 1.75
+radial_segments = 12
+rings = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_hqeym"]
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="Animation" id="Animation_dikuy"]
 length = 0.001
@@ -40,69 +58,87 @@ _data = {
 "shoot": SubResource("Animation_x58x2")
 }
 
-[sub_resource type="Resource" id="Resource_tjpfx"]
-script = ExtResource("6_iklwr")
-slot_name = "Glock"
-slot_category = "sidearms"
-start_picked_up = false
-skip_selection = false
-hide_in_menu = false
-item_scene = ExtResource("6_e2dp5")
+[sub_resource type="BoxShape3D" id="BoxShape3D_1x7if"]
+size = Vector3(0.75, 0, 0.75)
 
-[sub_resource type="Resource" id="Resource_mhaew"]
-script = ExtResource("6_iklwr")
-slot_name = ""
-slot_category = ""
-start_picked_up = false
-skip_selection = false
-hide_in_menu = false
-item_scene = ExtResource("8_n1hjb")
+[node name="player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
 
-[sub_resource type="Resource" id="Resource_gtidv"]
-script = ExtResource("6_fv6dh")
-category_name = "sidearms"
-loadout_items = Array[ExtResource("6_iklwr")]([SubResource("Resource_tjpfx"), SubResource("Resource_mhaew")])
-MAX_ITEMS = 0
-ignore_start_picked_up = false
-no_duplicates = true
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="." node_paths=PackedStringArray("character")]
+replication_config = SubResource("SceneReplicationConfig_385im")
+script = ExtResource("11_5ch4p")
+character = NodePath("..")
 
-[node name="player" instance=ExtResource("1_5ynx5")]
-script = ExtResource("2_wvk31")
-mouse_sensitivity = 5.0
-ladder_change_dir_curve = SubResource("Curve_k1oxi")
-eye_relief = 0.2
+[node name="MouseCaptureInputHandler" type="Node" parent="InputSynchronizer"]
+script = ExtResource("9_k2p05")
 
-[node name="MeshInstance3D" parent="CollisionShape3D" index="0"]
+[node name="LookInputHandler" type="Node" parent="InputSynchronizer" node_paths=PackedStringArray("camera")]
+script = ExtResource("7_h4vjj")
+camera = NodePath("../../Camera3D")
+sensitivity = 0.125
+
+[node name="JumpInputHandler" type="Node" parent="InputSynchronizer"]
+script = ExtResource("5_85fw1")
+
+[node name="SprintInputHandler" type="Node" parent="InputSynchronizer" node_paths=PackedStringArray("movement_input_handler")]
+script = ExtResource("7_gmeuo")
+movement_input_handler = NodePath("../QuakeMovementInputHandler")
+
+[node name="CrouchInputHandler" type="Node" parent="InputSynchronizer" node_paths=PackedStringArray("character_bounding_box", "look_input_handler", "jump_input_handler", "movement_input_handler")]
+script = ExtResource("7_6ew3e")
+character_bounding_box = NodePath("../../CollisionShape3D")
+look_input_handler = NodePath("../LookInputHandler")
+jump_input_handler = NodePath("../JumpInputHandler")
+movement_input_handler = NodePath("../QuakeMovementInputHandler")
+crouch_height = 0.75
+
+[node name="JumpInhibitor" type="Node" parent="InputSynchronizer/CrouchInputHandler" node_paths=PackedStringArray("jump_input_handler")]
+script = ExtResource("6_3bhcy")
+jump_input_handler = NodePath("../../JumpInputHandler")
+disable_jump_signal_name = "crouching"
+enable_jump_signal_name = "standing"
+
+[node name="SprintThrottle" type="Node" parent="InputSynchronizer/CrouchInputHandler"]
+script = ExtResource("7_yvdxm")
+
+[node name="QuakeMovementInputHandler" type="Node" parent="InputSynchronizer" node_paths=PackedStringArray("look_input_handler")]
+script = ExtResource("6_0w0ra")
+look_input_handler = NodePath("../LookInputHandler")
+SPEED = 500.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("BoxShape3D_1ejd2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 visible = false
 layers = 4
+mesh = SubResource("CapsuleMesh_xqu5i")
+skeleton = NodePath("../..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
-autoplay = "idle"
-playback_default_blend_time = 0.05
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+visible = false
+layers = 2
+mesh = SubResource("BoxMesh_hqeym")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_pri81")
 }
+autoplay = "idle"
+playback_default_blend_time = 0.05
 
-[node name="ADS_point" type="Marker3D" parent="torso/head" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.249049)
-
-[node name="Camera3D" type="Camera3D" parent="torso/head" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.1)
 cull_mask = 1048573
 fov = 90.0
 near = 0.001
 script = ExtResource("3_8224c")
-_handler = NodePath("../../..")
-_viewmodel_camera = NodePath("HUD/SubViewportContainer/SubViewport/GunCamera")
-_mount_point = NodePath("..")
-_crosshairs = NodePath("HUD/Crosshairs")
 
-[node name="RayCast3D" type="RayCast3D" parent="torso/head/Camera3D" index="0"]
-visible = false
-target_position = Vector3(0, 0, -50)
-collision_mask = 2
-
-[node name="HUD" type="Control" parent="torso/head/Camera3D" index="1"]
+[node name="HUD" type="Control" parent="Camera3D"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,7 +147,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Crosshairs" type="Control" parent="torso/head/Camera3D/HUD" index="0"]
+[node name="Crosshairs" type="Control" parent="Camera3D/HUD"]
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 1
 anchors_preset = 8
@@ -129,11 +165,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
 script = ExtResource("4_6f3j0")
-_handler = NodePath("../../../../..")
-_loadout = NodePath("../../../../loadout")
 CENTER_DOT_ALPHA = 0.5
 
-[node name="center_dot" type="ColorRect" parent="torso/head/Camera3D/HUD/Crosshairs" index="0"]
+[node name="center_dot" type="ColorRect" parent="Camera3D/HUD/Crosshairs"]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 offset_left = 249.0
@@ -142,54 +176,39 @@ offset_right = 251.0
 offset_bottom = 251.0
 mouse_filter = 1
 
-[node name="top_hair" type="Line2D" parent="torso/head/Camera3D/HUD/Crosshairs" index="1"]
+[node name="top_hair" type="Line2D" parent="Camera3D/HUD/Crosshairs"]
 points = PackedVector2Array(250, 250, 250, 230)
 width = 2.0
 antialiased = true
 
-[node name="bottom_hair" type="Line2D" parent="torso/head/Camera3D/HUD/Crosshairs" index="2"]
+[node name="bottom_hair" type="Line2D" parent="Camera3D/HUD/Crosshairs"]
 points = PackedVector2Array(250, 250, 250, 270)
 width = 2.0
 
-[node name="left_hair" type="Line2D" parent="torso/head/Camera3D/HUD/Crosshairs" index="3"]
+[node name="left_hair" type="Line2D" parent="Camera3D/HUD/Crosshairs"]
 points = PackedVector2Array(250, 250, 230, 250)
 width = 2.0
 
-[node name="right_hair" type="Line2D" parent="torso/head/Camera3D/HUD/Crosshairs" index="4"]
+[node name="right_hair" type="Line2D" parent="Camera3D/HUD/Crosshairs"]
 points = PackedVector2Array(250, 250, 270, 250)
 width = 2.0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="torso/head/Camera3D/HUD" index="1"]
+[node name="SwimTest3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+shape = SubResource("BoxShape3D_1x7if")
+target_position = Vector3(0, -1.75, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
+pixel_size = 0.0075
+texture = ExtResource("10_wp1lh")
 
-[node name="SubViewport" type="SubViewport" parent="torso/head/Camera3D/HUD/SubViewportContainer" index="0"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 0
-
-[node name="GunCamera" type="Camera3D" parent="torso/head/Camera3D/HUD/SubViewportContainer/SubViewport" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.1)
-cull_mask = 2
-fov = 90.0
-near = 0.001
-
-[node name="shoulder" parent="torso" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
-
-[node name="loadout" parent="torso" index="2" instance=ExtResource("4_pjc0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
-_controller = NodePath("../..")
-_mount_point = NodePath("../shoulder")
-loadout_categories = Array[ExtResource("6_fv6dh")]([SubResource("Resource_gtidv")])
+[node name="Decal" type="Decal" parent="."]
+size = Vector3(0.75, 2, 0.75)
+texture_albedo = ExtResource("10_qxm60")
+distance_fade_enabled = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

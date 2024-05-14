@@ -1,4 +1,5 @@
 extends Camera3D
+class_name HeadBob
 
 
 # Head bob stuff
@@ -16,7 +17,9 @@ var bob_time : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#if !handler.head_bob_enabled: set_process(false)
+	if !handler:
+		set_process(false)
+		return
 	
 	viewmodel_camera.set_environment(get_environment())
 	if !is_multiplayer_authority():
